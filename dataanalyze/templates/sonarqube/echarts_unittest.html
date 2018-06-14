@@ -1,0 +1,149 @@
+{% extends 'basehtml/base.html' %}
+{% block page_inner %}
+        {% load staticfiles %}
+    <script src="{% static 'assets/js/echarts.js'%}"></script>
+
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+    <div class="col-md-12">
+{#        <h1 class="page-head-line">部门</h1>#}
+        <h1 class="page-subhead-line"><strong>单元测试情况</strong></h1>
+    </div>
+    </div>
+    <div class="col-md-12 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-inline" role="form" action="" method="POST">
+                    <div class="form-group" >
+                        <label>部门名称</label>
+                        <select class="form-control" name="phone_name">
+                                <option value="-1">---请选择---</option>
+                                <option value="-1">---运营支撑部---</option>B
+                                {% for name in phone_list %}
+                                    <option value={{ name.phone_name }}>{{ name.phone_name }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+{#                    <div class="form-group">#}
+{#                        <label>Bug等级</label>#}
+{#                        <select class="form-control" name="phone_OS">#}
+{#                            <option value="-1">---请选择---</option>#}
+{#                            <option value= 0>iOS</option>#}
+{#                            <option value= 1>Android</option>#}
+{#                        </select>#}
+{#                    </div>#}
+                    <div class="form-group">
+                        <label>开始时间</label>
+                        <div class="input-group date" data-provide="datepicker"  data-date-format="yyyy-mm-dd" data-date-viewmode="years" data-date-minviewmode="months">
+                            <input id="onlineday_start" type="text" class="form-control check" name="starttime" placeholder="{{ timestart }}">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                         <label>结束时间</label>
+                        <div class="input-group date" data-provide="datepicker"  data-date-format="yyyy-mm-dd" data-date-viewmode="years" data-date-minviewmode="months">
+                            <input id="onlineday_end" type="text" class="form-control check" name="endtime" placeholder="{{ endtime }}">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group pull-right">
+                        <button type="submit" class="btn btn-info">查询</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+   <div class="panel panel-default">
+        <div class="panel-body">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#bug_table" data-toggle="tab">单元测试统计表</a>
+                </li>
+                <li class="">
+                    <a href="#bug_status" data-toggle="tab">单元测试统计趋势</a>
+                </li>
+{#                <li class="">#}
+{#                    <a href="#total_status" data-toggle="tab">总体趋势</a>#}
+{#                </li>#}
+            </ul>
+
+
+            <div class="tab-content">
+                {# Bug统计表 #}
+                <div class="tab-pane fade active in" id="bug_table">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>模块名称</th>
+                                                <th>覆盖率</th>
+                                                <th>更新时间</th>
+                                                <th>更新开发</th>
+                                                <th>所属部门</th>
+                                            </tr>
+                                        </thead>
+                                            <tbody>
+{#                                                {% for phone in phone_list %}#}
+                                                <tr id="phone_clone">
+                                                    <td>1</td>
+                                                    <td>center-car</td>
+                                                    <td>33%</td>
+                                                    <td>2018-06-06 15:20:30</td>
+                                                    <td>唐成龙</td>
+                                                    <td>运营支撑</td>
+                                                </tr>
+{#                                                {% endfor %}#}
+                                            </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                {# 单元测试统计趋势 #}
+                <div class="tab-pane fade" id="bug_status">
+                    <div id="main2" style="width: 1100px;height:500px;"></div>
+                </div>
+                {# 总体趋势 #}
+{#                <div class="tab-pane fade" id="total_status">#}
+{#                    <div id="main3" style="width: 1100px;height:500px;"></div>#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+
+     <script type="text/javascript">
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main2'));
+                // 指定图表的配置项和数据
+                var option = {
+                        title: {
+                            text: '单元测试变化(1~12月)',
+{#                            subtext: '1~12月',#}
+                            top: 10,
+                            left: 80,
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            data: [33, 20, 60, 80, 66, 89, 100, 66, 55, 12, 18, 36],
+                            type: 'line'
+                        }]
+                    };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            </script>
+
+{% endblock %}

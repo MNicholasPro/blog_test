@@ -1,4 +1,10 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# @Time    : 2018/6/14 15:34
+# @Author  : zhoumingkai
+# @Site    :
+# @File    : urls.py
+# @Software: PyCharm
 
 from django.conf.urls import url
 

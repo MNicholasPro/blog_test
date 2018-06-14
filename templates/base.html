@@ -11,6 +11,17 @@
     <!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 
+      {#时间控件#}
+    <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker.css' %}" rel="stylesheet"/>
+    <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker3.css' %}" rel="stylesheet"/>
+    <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker3.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker3.standalone.css' %}" rel="stylesheet"/>
+    <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker3.standalone.min.css' %}" rel="stylesheet"/>
+
+      {#侧边栏#}
+    <link href="{% static 'bootstrap-3.3.7-dist/css/menusside.css' %}" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,11 +47,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="my-nav">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/userlogin/index/">主页</a></li>
+              {% if request.session.is_login %}
+                <li class="active"><a href="/userlogin/index/">主页</a></li>
+              {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.is_login %}
                   <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
+                  <li><a href="/userlogin/logout/">我的详情</a></li>
                   <li><a href="/userlogin/logout/">登出</a></li>
               {% else %}
                   <li><a href="/userlogin/login/">登录</a></li>
@@ -51,12 +65,27 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    {% block content %}{% endblock %}
+{#    <div id="container" style="overflow: hidden">#}
+        {% block content %}{% endblock %}
+        <footer>
+            &copy; 2018 曹操数据平台 | 质量控制部贡献
+        </footer>
+{#    </div>#}
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+    <script src="{% static 'bootstrap-3.3.7-dist/js/jquery-3.3.1.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+
+
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap-datepicker.js'%}"></script>
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap-fileupload.js'%}"></script>
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap-select.js'%}"></script>
+{#  footer  #}
+    <script src="{% static 'bootstrap-3.3.7-dist/js/custom.js'%}"></script>
+{#    <footer>#}
+{#        &copy; 2018 曹操数据平台 | 质量控制部贡献#}
+{#    </footer>#}
   </body>
 </html>

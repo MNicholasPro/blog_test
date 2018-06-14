@@ -20,6 +20,7 @@ from django.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^dataanalyze/', include('dataanalyze.urls')),
     url(r'^userlogin/', include('login.urls')),
     url(r'^captcha', include('captcha.urls'))  # 增加这一行
 ]

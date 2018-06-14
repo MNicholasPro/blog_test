@@ -42,7 +42,7 @@ def login(request):
 def register(request):
     if request.session.get('is_login', None):
         # 登录状态不允许注册。你可以修改这条原则！
-        return redirect("/index/")
+        return redirect("/userlogin/index/")
     if request.method == "POST":
         register_form = forms.RegisterForm(request.POST)
         message = "请检查填写的内容！"
@@ -73,7 +73,7 @@ def register(request):
                 new_user.email = email
                 new_user.sex = sex
                 new_user.save()
-                return redirect('/login/')  # 自动跳转到登录页面
+                return redirect('/userlogin/login/')  # 自动跳转到登录页面
     register_form = forms.RegisterForm()
     return render(request, 'login/register.html', locals())
 

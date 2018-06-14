@@ -11,7 +11,7 @@ class User(models.Model):
         ('female', "女"),
     )
 
-    name = models.CharField(max_length=128, unique=True)
+    name = models.CharField(max_length=128, unique=True,default='')
     password = models.CharField(max_length=256)
     email = models.EmailField(unique=True)
     sex = models.CharField(max_length=32, choices=gender, default="男")
