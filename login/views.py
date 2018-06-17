@@ -9,9 +9,11 @@ from login import models, forms
 
 
 def index(request):
-    pass
-    return render(request, 'login/index.html')
-
+    if request.session.get('is_login'):
+        return render(request, 'login/index.html')
+    else:
+        login_form = forms.UserForm()
+        return render(request, 'login/login.html', locals())
 
 def login(request):
     if request.session.get('is_login', None):

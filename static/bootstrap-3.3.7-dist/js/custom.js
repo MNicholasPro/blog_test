@@ -11,3 +11,4 @@ $(function(){
     footerPosition();
     $(window).resize(footerPosition);
 });
+

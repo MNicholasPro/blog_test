@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include
-
+from login import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^dataanalyze/', include('dataanalyze.urls')),
     url(r'^userlogin/', include('login.urls')),
-    url(r'^captcha', include('captcha.urls'))  # 增加这一行
+    url(r'^captcha', include('captcha.urls')),
+    url(r'^userlogin/login/', views.login),
 ]

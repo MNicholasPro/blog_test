@@ -6,6 +6,12 @@
 
 from django.shortcuts import render
 
+from login import forms
+
+
 def load_department_page(request):
-    pass
-    return render(request, 'zentao/echarts_department.html')
+    if request.session.get('is_login'):
+        return render(request, 'zentao/echarts_department.html')
+    else:
+        login_form = forms.UserForm()
+        return render(request, 'login/login.html', locals())
