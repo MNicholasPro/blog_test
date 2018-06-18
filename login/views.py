@@ -15,6 +15,7 @@ def index(request):
         login_form = forms.UserForm()
         return render(request, 'login/login.html', locals())
 
+
 def login(request):
     if request.session.get('is_login', None):
         return redirect("/userlogin/index/")
