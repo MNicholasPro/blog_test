@@ -10,8 +10,7 @@ from login import forms
 
 
 def load_unittest_page(request):
-    if request.session.get('is_login'):
-        return render(request, 'sonarqube/echarts_unittest.html')
-    else:
+    if request.session.get('is_login', None) is None:
         login_form = forms.UserForm()
         return render(request, 'login/login.html', locals())
+    return render(request, 'sonarqube/echarts_unittest.html')

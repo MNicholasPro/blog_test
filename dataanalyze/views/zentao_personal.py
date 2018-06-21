@@ -10,8 +10,7 @@ from login import forms
 
 
 def load_personal_page(request):
-    if request.session.get('is_login'):
-        return render(request, 'zentao/echarts_personal.html')
-    else:
+    if request.session.get('is_login') is None:
         login_form = forms.UserForm()
         return render(request, 'login/login.html', locals())
+    return render(request, 'zentao/echarts_personal.html')
