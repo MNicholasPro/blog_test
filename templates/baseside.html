@@ -4,34 +4,34 @@
             <h2>导航栏</h2>
             <br />
             <ul id="sideul">
-                <a href="/userlogin/index/">
-                    <li>首页</li>
-                </a>
+                <li>
+                    <a href="/userlogin/index/">
+                    首页
+                    </a>
+                </li>
                 <br>
-                <a href="/dataanalyze/zentao-department/">
 {#                    <li style="color: orange;">部门</li>#}
-                    <li>部门</li>
-                </a>
                 <br>
-                <a href="/dataanalyze/zentao-personal/">
-                    <li>个人</li>
-                </a>
-{#                <br>#}
-{#                <a href="##">#}
-{#                    <li>导航3</li>#}
-{#                </a>#}
-{#                <br>#}
-{#                <a href="##">#}
-{#                    <li>导航4</li>#}
-{#                </a>#}
-{#                <br>#}
-{#                <a href="##">#}
-{#                    <li>导航5</li>#}
-{#                </a>#}
-{#                <br>#}
-{#                <a href="##">#}
-{#                    <li>导航6</li>#}
-{#                </a>#}
+                <li class="dropdown">
+                    <a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+                    禅道
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/dataanalyze/zentao-department/">部门</a></li>
+                        <li><a href="/dataanalyze/zentao-personal/">个人</a></li>
+				    </ul>
+                </li>
+                <br>
+                <li class="dropdown">
+                    <a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+                    SonarQube
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/dataanalyze/sonarqube-unittest/">单元测试覆盖率</a></li>
+				    </ul>
+                </li>
             </ul>
         </aside>
         <div id='wrap'>

@@ -10,7 +10,7 @@ from login import forms
 
 
 def load_department_page(request):
-    if request.session.get('is_login') is None:
+    if request.session.get('is_login', None) is None:
         login_form = forms.UserForm()
         return render(request, 'login/login.html', locals())
     return render(request, 'zentao/echarts_department.html')
