@@ -1,0 +1,17 @@
+.zong{
+    padding: 0px;
+    top: 500px;
+    height: 100%;
+    width: 1680px;
+    /*margin: 0px auto;*/
+    float: right;
+    /*border-style: groove;*/
+    /*background-color: #e9e9e9;*/
+    background-color: white;
+}
+
+.dingbu{
+    width: 100%;
+    position:fixed;
+    z-index:99999;
+}

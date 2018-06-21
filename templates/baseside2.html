@@ -1,29 +1,39 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <h3>关于</h3>
-    <p>这是我的个人博客，它是使用Django开发的</p>
- </div>
-</div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
-    <h3>文章分类</h3>
-    {% if categories %}
-    <ul class="list-unstyled">
-    {% for c in categories %}
-      <li>- {{ c.name }}</li>
-    {% endfor %}
-    </ul>
-    {% endif %}
-</div>
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-body">
-    <h3>登录入口</h3>
-    <p>
-      <a href="/admin">登录</a><br />
-      <a href="/admin/logout">退出登录</a>
-    </p>
-</div>
-</div>
+        <input type='checkbox' id='sidemenu'>
+        <aside>
+{#            <h2>导航栏</h2>#}
+            <br />
+            <ul id="sideul">
+                <li>
+                    <a href="/userlogin/index/">
+                    首页
+                    </a>
+                </li>
+{#                    <li style="color: orange;">部门</li>#}
+                <br>
+                <li class="dropdown">
+                    <a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+                    禅道
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/dataanalyze/zentao-department/">部门</a></li>
+                        <li><a href="/dataanalyze/zentao-personal/">个人</a></li>
+				    </ul>
+                </li>
+                <br>
+                <li class="dropdown">
+                    <a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+                    SonarQube
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/dataanalyze/sonarqube-unittest/">单元测试覆盖率</a></li>
+				    </ul>
+                </li>
+            </ul>
+        </aside>
+{#        <div id='wrap'>#}
+{#            <label id='sideMenuControl' for='sidemenu'>≡</label>#}
+{#            <!--for 属性规定 label 与哪个表单元素绑定，即将这个控制侧边栏进出的按钮与checkbox绑定-->#}
+{#        </div>#}

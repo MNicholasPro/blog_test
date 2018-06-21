@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}部门详情{% endblock %}
 {% block content %}
+    <div class="zong">
     {% load staticfiles %}
     <script src="{% static 'bootstrap-3.3.7-dist/js/echarts.js'%}"></script>
-    {% include 'baseside.html' %}
     <div id="position2" class="row" xmlns="http://www.w3.org/1999/html">
         <div class="col-md-12">
     {#        <h1 class="page-head-line">部门</h1>#}
@@ -276,5 +276,5 @@
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
             </script>
-
+    </div>
 {% endblock %}

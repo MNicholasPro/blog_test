@@ -21,6 +21,7 @@
 
       {#侧边栏#}
     <link href="{% static 'bootstrap-3.3.7-dist/css/menusside.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-3.3.7-dist/css/buju.css' %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,6 +32,7 @@
     {% block css %}{% endblock %}
   </head>
   <body>
+    <div class="dingbu">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -48,7 +50,7 @@
         <div class="collapse navbar-collapse" id="my-nav">
           <ul class="nav navbar-nav">
               {% if request.session.is_login %}
-                <li class="active"><a href="/userlogin/index/">主页</a></li>
+{#                <li class="active"><a href="/userlogin/index/">主页</a></li>#}
               {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -64,6 +66,17 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+    </div>
+
+    {% if request.session.is_login %}
+        <div class="side">{% include 'baseside2.html' %}</div>
+    {% endif %}
+
+    <div>
+        <br>
+        <br>
+        <br>
+    </div>
 
     {% block content %}{% endblock %}
     <footer>

@@ -64,9 +64,7 @@ def register(request):
                     if same_email_user:  # 邮箱地址唯一
                         message = '该邮箱地址已被注册，请使用别的邮箱！'
                         return render(request, 'login/register.html', locals())
-
                     # 当一切都OK的情况下，创建新用户
-
                     new_user = models.User()
                     new_user.name = username
                     new_user.password = hash_code(password1)  # 使用加密密码
@@ -78,7 +76,6 @@ def register(request):
         return render(request, 'login/register.html', locals())
     # 登录状态不允许注册。你可以修改这条原则！
     return redirect("/userlogin/index/")
-
 
 
 def logout(request):
