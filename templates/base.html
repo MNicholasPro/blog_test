@@ -69,7 +69,7 @@
     </div>
 
     {% if request.session.is_login %}
-        <div class="side">{% include 'baseside2.html' %}</div>
+        <div class="side" style="width: 10%;overflow: auto">{% include 'baseside2.html' %}</div>
     {% endif %}
 
     <div>
@@ -78,9 +78,9 @@
         <br>
     </div>
 
-    {% block content %}{% endblock %}
+    <div style="width: 90%">{% block content %}{% endblock %}</div>
     <footer>
-        &copy; 2018 曹操数据平台 | 质量控制部贡献
+        &copy; 2018 曹操阅读
     </footer>
 
 
