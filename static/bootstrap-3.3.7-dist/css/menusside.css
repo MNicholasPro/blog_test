@@ -5,7 +5,7 @@
 
 #sidemenu:checked + aside {
     /*为被选中的sidemenu后的aside设置属性（紧邻）*/
-    left: 0;
+    left: 220px;
     /*点击按钮即选中checked后,侧边栏位置变为贴着左边,配合ease-out使用,有渐变滑出的效果*/
 }
 

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'captcha',
-    'dataanalyze',
+    'booksdata',
 ]
 
 MIDDLEWARE = [

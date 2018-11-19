@@ -33,7 +33,7 @@
   </head>
   <body>
     <div class="dingbu">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="background-color: teal;color: white">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -43,24 +43,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">览天下</a>
+          <a class="navbar-brand" href="#" style="color: white;font-size: 30px">曹操阅读</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="my-nav">
           <ul class="nav navbar-nav">
-              {% if request.session.is_login %}
+{#              {% if request.session.is_login %}#}
 {#                <li class="active"><a href="/userlogin/index/">主页</a></li>#}
-              {% endif %}
+{#              {% endif %}#}
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.is_login %}
-                  <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
-                  <li><a href="/userlogin/logout/">我的详情</a></li>
-                  <li><a href="/userlogin/logout/">登出</a></li>
+                  <li><a href="#" style="color: white">当前在线：{{ request.session.user_name }}</a></li>
+                  <li><a href="/userlogin/logout/" style="color: white">我的详情</a></li>
+                  <li><a href="/userlogin/logout/" style="color: white">登出</a></li>
               {% else %}
-                  <li><a href="/userlogin/login/">登录</a></li>
-                  <li><a href="/userlogin/register/">注册</a></li>
+                  <li><a href="/userlogin/login/" style="color: white">登录</a></li>
+                  <li><a href="/userlogin/register/" style="color: white">注册</a></li>
               {% endif %}
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -78,8 +78,8 @@
         <br>
     </div>
 
-    <div style="width: 90%">{% block content %}{% endblock %}</div>
-    <footer>
+    <div style="width: 89%;overflow: auto;float: right">{% block content %}{% endblock %}</div>
+    <footer  style="background-color: teal;color: white">
         &copy; 2018 曹操阅读
     </footer>
 
