@@ -7,7 +7,7 @@
 
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="padding-right: 195px">
         <div class="col-md-4 col-md-offset-4">
           <form class='form-login' action="/userlogin/login" method="post">
               {% csrf_token %}
@@ -15,7 +15,8 @@
               {% if message %}
                   <div class="alert alert-warning">{{ message }}</div>
               {% endif %}
-              <h2 class="text-center">欢迎登录</h2>
+              <h2 class="text-center">欢迎登录曹操阅读</h2>
+          <br>
 {#              {{ login_form }}#}
               <div class="form-group">
                   {{ login_form.username.label_tag }}

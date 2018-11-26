@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="padding-right: 195px">
         <div class="col-md-4 col-md-offset-4">
           <form class='form-register' action="/userlogin/register/" method="post">
 
@@ -16,7 +16,8 @@
 
               {% csrf_token %}
 
-              <h2 class="text-center">欢迎注册</h2>
+              <h2 class="text-center">欢迎注册曹操阅读</h2>
+          <br>
               <div class="form-group">
                   {{ register_form.username.label_tag }}
                   {{ register_form.username}}

@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}前言{% endblock %}
 {% block content %}
-    <div class="zong" style="with: 82%">
-        {% load staticfiles %}
-        <script src="{% static 'bootstrap-3.3.7-dist/js/echarts.js'%}"></script>
+{#    <div class="zong" style="with: 500px">#}
         <div id="position2" class="row" xmlns="http://www.w3.org/1999/html">
             <div class="col-md-12">
         {#        <h1 class="page-head-line">部门</h1>#}
@@ -20,10 +18,10 @@
                 <li>借阅期不超过30天，为更好的“雨露均沾”，请于30天内看完</li>
                 <li>若长期书籍丢失，公司会减少每月购书的预算，望大家体谅</li>
                 <li>书籍所有权归公司所有</li>
-                <li>借阅地址：<a href="https://yiqixie.com/s/home/fcADYMz-IpT_iHdILcQ5TjSaz">点击借阅</a></li>
+                <li>借阅地址：<a href="/booksdata/view-allbooks/">点击借阅</a></li>
                 <li>借阅归还都是以上网址</li>
             </ol>
             <span style="color: red">PS：请大家 遵守借阅规则，填写借阅记录，营造借阅环境，减少书籍丢失，维持采购预算，丰富精神世界！</span>
         </div>
-    </div>
+{#    </div>#}
 {% endblock %}

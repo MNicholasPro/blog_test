@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}借阅书籍{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container" style="width: 100%">
+        <div class="col-md-12 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-inline" role="form" action="/booksdata/view-allbooks/" method="POST">{% csrf_token %}
+                    <label>书籍名称</label>
+                    <div class="form-group" style="width: 300px;">
+                        <select name="b-bookid" id="b-bookid" class="selectpicker form-control" multiple data-live-search="true" data-live-search-placeholder="搜索" data-max-options="1">
+                              {% for id,name in bookListSelect %}
+                                  <option value={{ id }}>{{ name }}</option>
+                              {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group pull-right">
+                        <button type="submit" class="btn btn-info">查询</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+                <table border="1" class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="col-lg-1">#</th>
+                        <th class="col-lg-2">书籍名称</th>
+{#                        <th class="col-lg-1">作者</th>#}
+{#                        <th class="col-lg-2">出版社</th>#}
+                        <th class="col-lg-1">书籍类型</th>
+                        <th class="col-lg-1">书籍状态</th>
+                        <th class="col-lg-1">借阅人</th>
+                        <th class="col-lg-1">备注</th>
+                        <th class="col-lg-1">操作</th>
+                    </tr>
+                    </thead>
+                    <today>
+                        {% for book in newbookList %}
+                            <tr class="info">
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ book.book_name }}</td>
+{#                                <td>{{ book.book_author_id }}</td>#}
+{#                                <td>{{ book.book_publisher_id }}</td>#}
+                                <td>{{ book.book_type_id }}</td>
+                                <td>{{ book.get_book_state_display }}</td>
+                                <td>{{ book.book_person }}</td>
+                                <td>{{ book.book_item }}</td>
+                                <td>
+                                    {% if book.book_state == 0 %}
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myBorrowItem" onclick="Assign_get_id({{ book.id }})">借阅</button>
+                                    <!-- 模态框（Modal） -->
+                                                <div style="font-size:18px;" class="modal fade" id="myBorrowItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 style="font-size:30px;" class="modal-title" id="myModalLabel">
+                                                                    借阅说明
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                 <div class="form-group" class="form-group">
+                                                                 <label>部门</label>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" name="dept_code" id="dept_code">
+                                                                        <option value=0>---请选择---</option>
+                                                                        {% for code,value in departmentListSelect %}
+                                                                            <option value= {{ code }}>{{ value }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                             </div>
+                                                             <div class="form-group">
+                                                                 <label>备注</label>
+                                                                <div class="form-group">
+                                                                    <textarea id="borrow_item" name="borrow_item" class="form-control" type="text"  placeholder="请输入借阅说明！！！" rows="3"></textarea>
+                                                                </div>
+                                                             </div>
+                                                                <div class="form-group">
+                                                                   <label>开始时间</label>
+                                                                    <div class="input-group date" data-provide="datepicker"  data-date-format="yyyy-mm-dd" data-date-viewmode="years" data-date-minviewmode="months">
+                                                                        <input id="borrow_start" type="text" class="form-control check" name="reportstartttime" placeholder="请输入开始时间！！！">
+                                                                        <div class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-th"></span>
+                                                                        </div>
+                                                                    </div>
+                                                             </div>
+                                                                <div class="form-group">
+                                                                 <label>结束时间</label>
+                                                                <div class="input-group date" data-provide="datepicker"  data-date-format="yyyy-mm-dd" data-date-viewmode="years" data-date-minviewmode="months">
+                                                                    <input id="borrow_end" type="text" class="form-control check" name="reportendtime" placeholder="请输入结束时间！！！">
+                                                                    <div class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-th"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                                    <button type="button" class="btn btn-primary" onclick='borrowbook({{ book.id }}, 1)'>提交</button>
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- /.modal-content -->
+                                                    </div><!-- /.modal -->
+                                                </div>
+                                        {% endif %}
+                                    {% if book.book_state == 2 %}
+                                    <button type="button" class="btn btn-success" onclick='borrowbook({{ book.id }}, 2)'>归还</button>
+                                    {% endif %}
+                                    <a href="/booksdata/view-book_log/{{ book.id }}" type="button" class="btn btn-success">日志</a>
+                                    {% if request.session.user_id == 1 %}
+{#                                    <button type="button" class="btn btn-danger" onclick='changetoold({{ book.id }})'>删除</button>#}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </today>
+                </table>
+                {% if flag == 0 %}
+                <div class="form-group pull-right" style="display: none">
+                {% elif flag != 0 %}
+                <div class="form-group pull-right">
+                {% endif %}
+                        <span class="step-links" style="float: right">
+                            {% if newbookList.has_previous %}
+                          <a href="?page={{ newbookList.previous_page_number }}">前一页</a>
+                            {% endif %}
+
+                            <span class="current">
+                               第{{ newbookList.number }}页 ，共{{ newbookList.paginator.num_pages }}页.
+                            </span>
+
+                            {% if newbookList.has_next %}
+                                <a href="?page={{ newbookList.next_page_number }}">后一页</a>
+                            {% endif %}
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div> <!-- /container -->
+{% endblock %}

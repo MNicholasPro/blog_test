@@ -5,8 +5,7 @@
 # @Site    : 
 # @File    : department.py
 # @Software: PyCharm
-
-
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from booksdata.models.publisher import Publisher
 
@@ -33,3 +32,20 @@ def add_publisher(request):
                 return render(request, 'publisher/publisher.html', locals())
     pub_form = PublisherModelForm()
     return render(request, 'publisher/publisher.html', locals())
+
+
+#查看出版社名称
+def view_publisher(request):
+    publisherListSelect = Publisher.objects.all().values_list("id", "pub_name")
+    pubid = request.POST.get("b-pubid", "")
+    if pubid:
+        publisherList = Publisher.objects.filter(id=pubid)
+    else:
+        publisherList = Publisher.objects.all()
+    return render(request, 'publisher/view_publisher.html', locals())
+
+
+# 删除记录
+def delete_publisher(requset, deleteId):
+    Publisher.objects.filter(id=deleteId).delete()
+    return HttpResponse(1)

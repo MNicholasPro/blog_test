@@ -5,8 +5,7 @@
 # @Site    : 
 # @File    : department.py
 # @Software: PyCharm
-
-
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from booksdata.models.department import Department
 
@@ -37,4 +36,16 @@ def add_department(request):
 
 #查看部门名称
 def view_department(request):
+    departmentListSelect = Department.objects.all().values_list("id", "dept_name")
+    deptid = request.POST.get("b-deptid", "")
+    if deptid:
+        departmentList = Department.objects.filter(id=deptid)
+    else:
+        departmentList = Department.objects.all()
     return render(request, 'department/view_department.html', locals())
+
+
+# 删除记录
+def delete_dept(requset, deleteId):
+    Department.objects.filter(id=deleteId).delete()
+    return HttpResponse(1)

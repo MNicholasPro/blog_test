@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}添加书籍{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+              <div class="container-fluid">
+                  <form class='form-register' action="/booksdata/add-newbookdo/" method="post">{% csrf_token %}
+                      <div class="form-group">
+                          <label>1、书籍名称</label>
+                          <input type="text"
+                              class="form-control" name="b-name" id="b-name"
+                              placeholder="请输入书籍名称！！！">
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label>2、书籍类型</label>
+                        <div class="form-group" style="width: 300px;">
+                            <select name="b-type" id="b-type" class="selectpicker form-control" multiple data-live-search="true" data-live-search-placeholder="搜索" data-max-options="1">
+                                  {% for id,type in booktypeList %}
+                                      <option value={{ id }}>{{ type }}</option>
+                                  {% endfor %}
+                            </select>
+                        </div>
+                      </div>
+                      <br>
+{#                      <div class="form-group">#}
+{#                            <label>3、出版社</label>#}
+{#                            <div class="form-group" style="width: 300px;">#}
+{#                                <select name="b-pub" id="b-pub" class="selectpicker form-control" multiple data-live-search="true" data-live-search-placeholder="搜索" data-max-options="1">#}
+{#                                      {% for id,pub in publisherList %}#}
+{#                                          <option value={{ id }}>{{ pub }}</option>#}
+{#                                      {% endfor %}#}
+{#                                </select>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <br>#}
+{#                      <div class="form-group">#}
+{#                            <label>4、作者</label>#}
+{#                            <div class="form-group" style="width: 300px;">#}
+{#                                <select name="b-author" id="b-author" class="selectpicker form-control" multiple data-live-search="true" data-live-search-placeholder="搜索" >#}
+{#                                      {% for id,author in authorList %}#}
+{#                                          <option value={{ id }}>{{ author }}</option>#}
+{#                                      {% endfor %}#}
+{#                                </select>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <br>#}
+                      <div class="form-group">
+                          <label>3、备注</label>
+                          <input type="text"
+                              class="form-control" name="b-item" id="b-item"
+                              placeholder="请输入备注！！！">
+                      </div>
+                      <br>
+                      <button type="submit" class="btn btn-info">添加</button>
+                  </form>
+          </div>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

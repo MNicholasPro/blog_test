@@ -10,7 +10,9 @@
 
     <!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
-
+{#{% block css %}#}
+    <link href="{% static 'bootstrap-3.3.7-dist/css/normal.css' %}" rel="stylesheet">
+{#{% endblock %}#}
       {#时间控件#}
     <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker.css' %}" rel="stylesheet"/>
     <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker.min.css' %}" rel="stylesheet"/>
@@ -18,6 +20,10 @@
     <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker3.min.css' %}" rel="stylesheet"/>
     <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker3.standalone.css' %}" rel="stylesheet"/>
     <link href="{% static 'bootstrap-3.3.7-dist/css2/bootstrap-datepicker3.standalone.min.css' %}" rel="stylesheet"/>
+
+{#  bootstrap-selecct #}
+    <link href="{% static 'bootstrap-select-1.13.2/dist/css/bootstrap-select.css' %}" rel="stylesheet"/>
+    <link href="{% static 'bootstrap-select-1.13.2/dist/css/bootstrap-select.min.css' %}" rel="stylesheet"/>
 
       {#侧边栏#}
     <link href="{% static 'bootstrap-3.3.7-dist/css/menusside.css' %}" rel="stylesheet">
@@ -56,7 +62,7 @@
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.is_login %}
                   <li><a href="#" style="color: white">当前在线：{{ request.session.user_name }}</a></li>
-                  <li><a href="/userlogin/logout/" style="color: white">我的详情</a></li>
+{#                  <li><a href="/userlogin/logout/" style="color: white">我的详情</a></li>#}
                   <li><a href="/userlogin/logout/" style="color: white">登出</a></li>
               {% else %}
                   <li><a href="/userlogin/login/" style="color: white">登录</a></li>
@@ -93,6 +99,10 @@
     <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap-datepicker.js'%}"></script>
     <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap-fileupload.js'%}"></script>
     <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap-select.js'%}"></script>
+
+{#    bootstrap-select #}
+    <script src="{% static 'bootstrap-select-1.13.2/js/bootstrap-select.js'%}"></script>
+    <script src="{% static 'bootstrap-select-1.13.2/dist/js/bootstrap-select.js'%}"></script>
 {#  footer  #}
     <script src="{% static 'bootstrap-3.3.7-dist/js/custom.js'%}"></script>
 {#    <footer>#}

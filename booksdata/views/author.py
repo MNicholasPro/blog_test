@@ -5,10 +5,10 @@
 # @Site    : 
 # @File    : department.py
 # @Software: PyCharm
-
-
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from booksdata.models.department import Department
+
+from booksdata.models.author import Author
 
 
 # 新建作者
@@ -26,7 +26,7 @@ def add_author(request):
                 message = "作者名称不能为空！"
                 return render(request, 'author/author.html', locals())
             else:
-                new_author = Department()
+                new_author = Author()
                 new_author.author_name = author_name
                 new_author.save()
                 message = "作者名称添加成功！"
@@ -36,4 +36,15 @@ def add_author(request):
 
 #查看作者名称
 def vies_author(request):
+    authorListSelect = Author.objects.all().values_list("id", "author_name")
+    authorid = request.POST.get("b-authorid", "")
+    if authorid:
+        authorList = Author.objects.filter(id=authorid)
+    else:
+        authorList = Author.objects.all()
     return render(request, 'author/view_author.html', locals())
+
+# 删除记录
+def delete_author(requset, deleteId):
+    Author.objects.filter(id=deleteId).delete()
+    return HttpResponse(1)
