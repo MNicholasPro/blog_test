@@ -25,7 +25,7 @@ SECRET_KEY = '^m%6x27^_y0-xpxct)#eym4451v#e=ds!rc8@-5t9_wa^g^vgo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["10.200.182.70"]
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'captcha',
-    'booksdata',
+    'booksdata'
 ]
 
 MIDDLEWARE = [
@@ -84,13 +84,27 @@ WSGI_APPLICATION = 'blog_test.wsgi.application'
 #     }
 # }
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'blog',
+#         'USER':'root',
+#         'PASSWORD':'123456',
+#         'HOST':'127.0.0.1',
+#         'PORT':'3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
+        'NAME': 'book',
         'USER':'root',
-        'PASSWORD':'123456',
-        'HOST':'127.0.0.1',
+        'PASSWORD':'qazwsxedc',
+        'HOST':'10.200.182.70',
         'PORT':'3306',
     }
 }
