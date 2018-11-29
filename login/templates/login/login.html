@@ -15,23 +15,25 @@
               {% if message %}
                   <div class="alert alert-warning">{{ message }}</div>
               {% endif %}
-              <h2 class="text-center">欢迎登录曹操阅读</h2>
+              <h3 class="text-center">欢迎登录曹操阅读</h3>
           <br>
 {#              {{ login_form }}#}
               <div class="form-group">
-                  {{ login_form.username.label_tag }}
+                  <span>用户名:</span>
+{#                  {{ login_form.username.label_tag }}#}
                   {{ login_form.username}}
               </div>
               <div class="form-group">
-                  {{ login_form.password.label_tag }}
+                  <span>密码:</span>
+{#                  {{ login_form.password.label_tag }}#}
                   {{ login_form.password }}
               </div>
 
-              <div class="form-group">
-                  {{ login_form.captcha.errors }}
-                  {{ login_form.captcha.label_tag }}
-                  {{ login_form.captcha }}
-              </div>
+{#              <div class="form-group">#}
+{#                  {{ login_form.captcha.errors }}#}
+{#                  {{ login_form.captcha.label_tag }}#}
+{#                  {{ login_form.captcha }}#}
+{#              </div>#}
 
               <button type="reset" class="btn btn-default pull-left">重置</button>
               <button type="submit" class="btn btn-primary pull-right">提交</button>
