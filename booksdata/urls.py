@@ -40,4 +40,7 @@ urlpatterns = [
     url(r'^return-books/(\d+)', books.return_books, name='return_books'),
     url(r'^view-book_log/(\d+)', books.view_book_log, name='view_book_log'),
 
+    # 心愿书
+    url(r'^whish-books/', books.whish_books, name='whish_books'),
+
 ]

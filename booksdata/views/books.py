@@ -168,3 +168,7 @@ def page_change(request, newbookList_pre):
     except EmptyPage:
         newbookList = paginator.page(paginator.num_pages)
     return newbookList
+
+# 心愿书
+def whish_books(requset):
+    print("aaa")
