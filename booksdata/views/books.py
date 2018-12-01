@@ -46,21 +46,25 @@ def add_newbookdo(request):
 
 #查看书籍
 def view_newbooks(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     bookListSelect = Book.objects.filter(if_new=0).values_list("id", "book_name")
     departmentListSelect = Department.objects.all().values_list("id", "dept_name")
     bookId = request.POST.get("b-bookid", "")
     newbookList = []
     if  bookId != "":
         bookList = Book.objects.filter(if_new=0).filter(id=bookId).order_by("-id")
-        newbookList = append_list(bookList)
+        newbookList = append_list(request, bookList)
     else:
         bookList = Book.objects.filter(if_new=0).order_by("-id")
-        newbookList = append_list(bookList)
+        newbookList = append_list(request, bookList)
     return render(request, 'books/view_newbooks.html', locals())
 
 
 #封装求作者、出版社、书籍类型方法
-def append_list(bookList):
+def append_list(request, bookList):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     newbookList = []
     for eachbooklist in bookList:
         booktypeList = Booktype.objects.filter(id=eachbooklist.book_type_id).values("book_type")[0].get("book_type")
@@ -145,10 +149,10 @@ def view_allbooks(request):
     newbookList_pre = []
     if  bookId:
         bookList = Book.objects.filter(id=bookId).order_by("-id")
-        newbookList_pre = append_list(bookList)
+        newbookList_pre = append_list(request, bookList)
     else:
         bookList = Book.objects.all().order_by("-id")
-        newbookList_pre = append_list(bookList)
+        newbookList_pre = append_list(request, bookList)
     newbookList = page_change(request, newbookList_pre)
     return render(request, 'books/view_allbooks.html', locals())
 

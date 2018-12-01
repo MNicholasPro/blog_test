@@ -36,6 +36,8 @@ def add_author(request):
 
 #查看作者名称
 def vies_author(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     authorListSelect = Author.objects.all().values_list("id", "author_name")
     authorid = request.POST.get("b-authorid", "")
     if authorid:
@@ -45,6 +47,8 @@ def vies_author(request):
     return render(request, 'author/view_author.html', locals())
 
 # 删除记录
-def delete_author(requset, deleteId):
+def delete_author(request, deleteId):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     Author.objects.filter(id=deleteId).delete()
     return HttpResponse(1)

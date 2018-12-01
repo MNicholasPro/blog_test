@@ -36,6 +36,8 @@ def add_publisher(request):
 
 #查看出版社名称
 def view_publisher(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     publisherListSelect = Publisher.objects.all().values_list("id", "pub_name")
     pubid = request.POST.get("b-pubid", "")
     if pubid:
@@ -46,6 +48,8 @@ def view_publisher(request):
 
 
 # 删除记录
-def delete_publisher(requset, deleteId):
+def delete_publisher(request, deleteId):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     Publisher.objects.filter(id=deleteId).delete()
     return HttpResponse(1)

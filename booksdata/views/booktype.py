@@ -37,6 +37,8 @@ def add_booktype(request):
 
 #查看书籍类型名称
 def view_booktype(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     booktypeListSelect = Booktype.objects.all().values_list("id", "book_type")
     typeid = request.POST.get("b-typeid", "")
     if typeid:
@@ -47,6 +49,8 @@ def view_booktype(request):
 
 
 # 删除记录
-def delete_booktype(requset, deleteId):
+def delete_booktype(request, deleteId):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     Booktype.objects.filter(id=deleteId).delete()
     return HttpResponse(1)

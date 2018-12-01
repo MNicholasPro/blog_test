@@ -36,6 +36,8 @@ def add_department(request):
 
 #查看部门名称
 def view_department(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     departmentListSelect = Department.objects.all().values_list("id", "dept_name")
     deptid = request.POST.get("b-deptid", "")
     if deptid:
@@ -46,6 +48,8 @@ def view_department(request):
 
 
 # 删除记录
-def delete_dept(requset, deleteId):
+def delete_dept(request, deleteId):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     Department.objects.filter(id=deleteId).delete()
     return HttpResponse(1)
