@@ -80,6 +80,8 @@ def append_list(request, bookList):
 
 # 删除新书记录
 def change_newbooks(request, deleteId):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     if Book.objects.filter(id=deleteId).update(if_new=1):
         return HttpResponse(1)
     else:
@@ -89,6 +91,8 @@ def change_newbooks(request, deleteId):
 # 借用书籍
 @csrf_exempt
 def borrow_books(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     bookBorrower = request.session.get("user_name")
     dept_code = request.POST.get("dept_code", "")
     book_id = request.POST.get("book_id", "")
@@ -114,6 +118,8 @@ def borrow_books(request):
 
 # 归还书籍
 def return_books(request, bookId):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     bookBorrower = request.session.get("user_name")
     real_returnTime = (datetime.datetime.now()).strftime("%Y-%m-%d %H:%M:%S")
     book_person = Book.objects.filter(id=bookId).values("book_person")[0].get("book_person")
@@ -129,6 +135,8 @@ def return_books(request, bookId):
 
 #查看借阅日志
 def view_book_log(request, bookId):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     borrowloglist = BorrowLog.objects.filter(book_id=bookId).order_by("-id")
     new_borrowloglist = []
     borrowloglist_size = len(borrowloglist)
@@ -143,6 +151,8 @@ def view_book_log(request, bookId):
 
 # 查看所有书籍
 def view_allbooks(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     bookListSelect = Book.objects.all().values_list("id", "book_name")
     departmentListSelect = Department.objects.all().values_list("id", "dept_name")
     bookId = request.POST.get("b-bookid", "")
@@ -159,6 +169,8 @@ def view_allbooks(request):
 
 # 封装分页方法
 def page_change(request, newbookList_pre):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     paginator = Paginator(newbookList_pre, 2)
     page = request.GET.get('page', 1)
     try:
@@ -170,5 +182,7 @@ def page_change(request, newbookList_pre):
     return newbookList
 
 # 心愿书
-def whish_books(requset):
+def whish_books(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
     print("aaa")
