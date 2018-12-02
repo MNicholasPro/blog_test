@@ -87,27 +87,27 @@ WSGI_APPLICATION = 'blog_test.wsgi.application'
 import pymysql
 pymysql.install_as_MySQLdb()
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'blog',
-#         'USER':'root',
-#         'PASSWORD':'123456',
-#         'HOST':'127.0.0.1',
-#         'PORT':'3306',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'book',
+        'NAME': 'blog',
         'USER':'root',
-        'PASSWORD':'qazwsxedc',
-        'HOST':'10.200.182.70',
+        'PASSWORD':'123456',
+        'HOST':'127.0.0.1',
         'PORT':'3306',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'book',
+#         'USER':'root',
+#         'PASSWORD':'qazwsxedc',
+#         'HOST':'10.200.182.70',
+#         'PORT':'3306',
+#     }
+# }
 
 
 # Password validation
