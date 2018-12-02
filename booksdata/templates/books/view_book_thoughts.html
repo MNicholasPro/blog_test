@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}读书感悟{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container" style="width: 100%">
+        <div class="col-md-12 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>读书感悟</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+                <table border="1" class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="col-lg-1">#</th>
+                        <th class="col-lg-3">书籍名称</th>
+                        <th class="col-lg-3">感悟名称</th>
+                        <th class="col-lg-1">内容</th>
+                        <th class="col-lg-1">作者</th>
+                        <th class="col-lg-1">操作<a type="button" href="/booksdata/add-book-thoughts-page/" class="glyphicon-plus" style="border: none"></a></th>
+                    </tr>
+                    </thead>
+                    <today>
+                        {% for book in bookthoughtsList %}
+                            <tr class="info">
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ book.book_name }}</td>
+                                <td>{{ book.book_title }}</td>
+                                <td>{{ book.book_thought }}</td>
+                                <td>{{ book.book_thought_author }}</td>
+                                <td>
+                                    <a href="/booksdata/view-book-thoughts-detail/{{ book.id }}" type="button" class="btn btn-success">查看</a>
+                                    {% if request.session.user_id == 1 %}
+                                    <button type="button" class="btn btn-danger" onclick='changetoold({{ book.id }}, 3)'>删除</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </today>
+                </table>
+{#                {% if flag == 0 %}#}
+{#                <div class="form-group pull-right" style="display: none">#}
+{#                {% elif flag != 0 %}#}
+{#                <div class="form-group pull-right">#}
+{#                {% endif %}#}
+{#                        <span class="step-links" style="float: right">#}
+{#                            {% if report_list.has_previous %}#}
+{#                          <a href="?page={{ report_list.previous_page_number }}">前一页</a>#}
+{#                            {% endif %}#}
+{##}
+{#                            <span class="current">#}
+{#                               第{{ report_list.number }}页 ，共{{ report_list.paginator.num_pages }}页.#}
+{#                            </span>#}
+{##}
+{#                            {% if report_list.has_next %}#}
+{#                                <a href="?page={{ report_list.next_page_number }}">后一页</a>#}
+{#                            {% endif %}#}
+{#                        </span>#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+    </div>
+    </div> <!-- /container -->
+{% endblock %}

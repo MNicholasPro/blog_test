@@ -32,3 +32,8 @@ class AuthorModelForm(forms.Form):
 
 class BooktypeModelForm(forms.Form):
     book_type = forms.CharField(label="书籍类型", max_length=64, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '请输入书籍类型！！！'}))
+
+class WishBookModelForm(forms.Form):
+    book_name = forms.CharField(label="书籍名称", max_length=256, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '请输入书籍名称！！！'}))
+    book_author = forms.CharField(label="书籍作者", max_length=32, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '请输入书籍作者！！！'}))
+    book_item = forms.CharField(label="书籍备注", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '请输入书籍备注！！！'}))

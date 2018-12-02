@@ -18,7 +18,7 @@ function deleteRecord(deleteId, type) {
         address = "/booksdata/delete-author/";
     }else if (type == 2){
         address = "/booksdata/delete-booktype/";
-    }else if (type == 3){
+    }else if (type = 3){
         address = "/booksdata/delete-dept/";
     }else if (type == 4){
         address = "/booksdata/delete-publisher/";
@@ -34,8 +34,16 @@ function deleteRecord(deleteId, type) {
     });
 }
 
-function changetoold(newId) {
-    $.getJSON("/booksdata/change-books/" + newId, {}, function (data) {
+function changetoold(newId, type) {
+    var address = "";
+    if (type == 1){
+        address = "/booksdata/change-books/";
+    }else if (type == 2){
+        address = "/booksdata/delete-wish-book/";
+    }else if (type == 3){
+        address = "/booksdata/delete-book-thoughts/";
+    }
+    $.getJSON(address + newId, {}, function (data) {
         if (data == 1){
             alert("删除成功！！！");
             location.reload();
@@ -56,7 +64,7 @@ function borrowbook(bookId, type) {
     var borrow_item = $("#borrow_item").val();
     var borrow_start = $("#borrow_start").val();
     var borrow_end = $("#borrow_end").val();
-    if (type == 1){
+    if (type === 1){
         $.post("/booksdata/borrow-books/", {"book_id":window.bookId,"dept_code":dept_code[0],"borrow_item":borrow_item,"borrow_start":borrow_start,"borrow_end":borrow_end}, function (data) {
             if (data == 1){
                 alert("借阅成功！！！");
@@ -80,5 +88,16 @@ function borrowbook(bookId, type) {
             }
         });
     }
+}
 
+function addReply(bookthoughtsid) {
+    var b_replycontent = $("#b-ReplyContent").val();
+    $.post('/booksdata/add-book-thoughts-reply/',{"bookthoughtsid":bookthoughtsid,"b_replycontent":b_replycontent},function(data){
+        if(data=='1')
+         {
+              toastr.success("留言成功,感谢！！！");location.reload();
+         }
+         else
+             toastr.error("未能成功留言，请联系管理员！！！");
+    });
 }

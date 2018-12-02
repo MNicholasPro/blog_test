@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}添加书籍{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+                  <form class='form-register' action="/booksdata/add-book-thoughts/" method="post">{% csrf_token %}
+                      <div class="form-group">
+                          <label>书籍名称</label>
+                           <div class="form-group" style="width: 300px;">
+                                <select name="b-bookid" id="b-bookid" class="selectpicker form-control" multiple data-live-search="true" data-live-search-placeholder="搜索" data-max-options="1">
+                                      {% for id,name in bookListSelect %}
+                                          <option value={{ id }}>{{ name }}</option>
+                                      {% endfor %}
+                                </select>
+                            </div>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <label>感悟名称</label>
+                        <input type="text"
+                            class="form-control" name="b-Title" id="b-Title"
+                            placeholder="请输入感悟名称！！！">
+                    </div><br>
+                      <div class="form-group">
+                          <label>读书感悟</label>
+                            <textarea class="form-control" style='overflow-y: hidden;height:100px' oninput="this.style.height = this.scrollHeight + 'px';" onkeyup="javascript:checkWord(this, 1024);" onmousedown="javascript:checkWord(this, 1024);" placeholder="请输入读书感悟！！！" name="b-thought" id="b-thought"></textarea>
+                            <div style="color: red;float: right;font-size: 10px;">*还可以输入<span style="font-family: Georgia; font-size: 15px;" id="wordCheck">1024</span>个字</div>
+                          <script>
+                {#            $(document).ready(function () {#}
+                {#                $("textarea.form-control").bind("mouseover",function () {#}
+                {#                    $(this).next().show();#}
+                {#                }).bind("mouseout",function () {#}
+                {#                    $(this).next().hide();#}
+                {#                });#}
+                {#            });#}
+
+                            function Q(s) { return document.getElementById(s); }
+
+                            function checkWord(c, count) {
+                                var maxstrlen = count;    //设置的限定的字数
+                                len = maxstrlen;
+                                var str = c.value;              //对象的内容
+                                myLen = getStrleng(str, maxstrlen);   //计算str的字符个数
+                                var wck = "";
+                                var srcElement= event.srcElement.id;
+                                console.log(srcElement);
+                                wck = Q("wordCheck");
+                                if (myLen > len * 2) {
+                                    c.value = str.substring(0, i - 1);
+                                } else {
+                                    if (wck){
+                                        wck.innerHTML = Math.floor((len * 2 - myLen) / 2);    //Math.floor(x),返回值：小于等于 x，且与 x 最接近的整数
+                                    }
+                                }                                                                                       //但是Math.floor((5 * 2 - 1) / 2)=4
+                            }
+
+                            function getStrleng(str, count) {
+                                var maxstrlen = count;
+                                myLen = 0;
+                                i = 0;
+                                for (; (i < str.length) && (myLen <= maxstrlen * 2); i++) {
+                                    myLen += 2;
+                {#                    if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128)           //根据Unicode编码值判断是否汉字#}
+                {#                        myLen ++;#}
+                {#                    else#}
+                {#                        myLen += 2;#}
+                                }
+                                return myLen;
+                            }
+                        </script>
+                      </div>
+                      <br>
+                      <button type="submit" class="btn btn-info">添加</button>
+                  </form>
+    </div> <!-- /container -->
+{% endblock %}

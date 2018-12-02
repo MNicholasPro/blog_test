@@ -7,14 +7,11 @@
 # @Software: PyCharm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
 from booksdata.models.booktype import Booktype
-
-
-# 新建作者
 from login.forms import BooktypeModelForm
 
 
+# 新建书籍类型
 def add_booktype(request):
     if request.session.get('is_login', None) is None:
         return redirect("/userlogin/index/")
@@ -26,9 +23,9 @@ def add_booktype(request):
                 message = "书籍类型不能为空！"
                 return render(request, 'booktype/booktype.html', locals())
             else:
-                new_author = Booktype()
-                new_author.book_type = book_type
-                new_author.save()
+                new_type = Booktype()
+                new_type.book_type = book_type
+                new_type.save()
                 message = "书籍类型添加成功！"
                 return render(request, 'booktype/booktype.html', locals())
     booktype_form = BooktypeModelForm()

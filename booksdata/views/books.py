@@ -12,12 +12,17 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 from booksdata.models.book import Book
+from booksdata.models.book_thoughts import BookThoughts
+from booksdata.models.book_thoughts_reply import BookThoughtsReply
 from booksdata.models.booktype import Booktype
 from booksdata.models.borrow_log import BorrowLog
 from booksdata.models.department import Department
 from booksdata.models.publisher import Publisher
 from booksdata.models.author import Author
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
+
+from booksdata.models.wish_book import WishBook
+from login.forms import WishBookModelForm
 
 
 # 添加书籍
@@ -171,7 +176,7 @@ def view_allbooks(request):
 def page_change(request, newbookList_pre):
     if request.session.get('is_login', None) is None:
         return redirect("/userlogin/index/")
-    paginator = Paginator(newbookList_pre, 2)
+    paginator = Paginator(newbookList_pre, 10)
     page = request.GET.get('page', 1)
     try:
         newbookList = paginator.page(page)
@@ -181,8 +186,107 @@ def page_change(request, newbookList_pre):
         newbookList = paginator.page(paginator.num_pages)
     return newbookList
 
+
 # 心愿书
-def whish_books(request):
+def add_whish_books(request):
     if request.session.get('is_login', None) is None:
         return redirect("/userlogin/index/")
-    print("aaa")
+    if request.method == "POST":
+        wishbook_form = WishBookModelForm(request.POST)
+        if wishbook_form.is_valid():
+            book_name = wishbook_form.cleaned_data['book_name']
+            book_author = wishbook_form.cleaned_data['book_author']
+            book_item = wishbook_form.cleaned_data['book_item']
+            if not wishbook_form:
+                message = "书籍相关内容不能为空！"
+                return render(request, 'books/wish_book.html', locals())
+            else:
+                new_wish_book = WishBook()
+                new_wish_book.book_name = book_name
+                new_wish_book.book_author = book_author
+                new_wish_book.book_item = book_item
+                new_wish_book.save()
+                message = "书籍类型添加成功！"
+                return render(request, 'books/wish_book.html', locals())
+    wishbook_form = WishBookModelForm()
+    return render(request, 'books/wish_book.html', locals())
+
+
+# 查看所有心愿书籍
+def view_whish_books(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    wishbookList = WishBook.objects.filter(deleted=0)
+    return render(request, 'books/view_wishbooks.html', locals())
+
+
+# 删除心愿书记录
+def delete_wish_book(request, deleteId):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    if WishBook.objects.filter(id=deleteId).update(deleted=1):
+        return HttpResponse(1)
+    else:
+        return HttpResponse(0)
+
+
+# 新增读书感悟
+def add_book_thoughts_page(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    bookListSelect = Book.objects.all().values_list("id", "book_name")
+    return render(request, 'books/book_thoughts.html', locals())
+
+
+# 操作新增
+def add_book_thoughts(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    book_id = request.POST.get("b-bookid", "")
+    book_title = request.POST.get("b-Title", "")
+    book_thought = request.POST.get("b-thought", "")
+    book_thought_author = request.session.get("user_name")
+    book_name = Book.objects.filter(id=book_id).values("book_name")[0].get("book_name")
+    BookThoughts.objects.create(book_name=book_name,book_title=book_title,book_thought=book_thought,book_thought_author=book_thought_author,book_id=int(book_id))
+    return render(request, 'books/book_thoughts.html', locals())
+
+
+# 查看读书感悟
+def view_book_thoughts(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    bookthoughtsList = BookThoughts.objects.filter(deleted=0)
+    return render(request, 'books/view_book_thoughts.html', locals())
+
+
+# 查看读书感悟详情
+def view_book_thoughts_detail(request, bookthoughtsid):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    bookthoughtsDetail = BookThoughts.objects.filter(id=bookthoughtsid)[0]
+    bookthoughtreplyList = BookThoughtsReply.objects.filter(deleted=0).order_by("-id")
+    return render(request, 'books/book_thoughts_detail.html', locals())
+
+
+# 添加读书感悟留言
+@csrf_exempt
+def add_book_thoughts_reply(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    bookthoughtsid = request.POST.get("bookthoughtsid", "")
+    b_replycontent = request.POST.get("b_replycontent", "")
+    book_thought_reply_author = request.session.get("user_name")
+    if BookThoughtsReply.objects.create(book_thought_reply=b_replycontent,book_thought_reply_author=book_thought_reply_author,book_thought_id=bookthoughtsid):
+        return HttpResponse(1)
+    else:
+        return HttpResponse(0)
+
+
+# 删除读书感悟
+def delete_book_thoughts(request, deleteId):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    if BookThoughts.objects.filter(id=deleteId).update(deleted=1):
+        return HttpResponse(1)
+    else:
+        return HttpResponse(0)

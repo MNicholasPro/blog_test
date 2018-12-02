@@ -34,6 +34,7 @@
                         <th class="col-lg-2">书籍名称</th>
 {#                        <th class="col-lg-1">作者</th>#}
 {#                        <th class="col-lg-2">出版社</th>#}
+                        <th class="col-lg-2">借阅次数</th>
                         <th class="col-lg-1">书籍类型</th>
                         <th class="col-lg-1">书籍状态</th>
                         <th class="col-lg-1">借阅人</th>
@@ -48,6 +49,7 @@
                                 <td>{{ book.book_name }}</td>
 {#                                <td>{{ book.book_author_id }}</td>#}
 {#                                <td>{{ book.book_publisher_id }}</td>#}
+                                <td>{{ book.book_count }}</td>
                                 <td>{{ book.book_type_id }}</td>
                                 <td>{{ book.get_book_state_display }}</td>
                                 <td>{{ book.book_person }}</td>

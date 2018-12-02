@@ -40,7 +40,17 @@ urlpatterns = [
     url(r'^return-books/(\d+)', books.return_books, name='return_books'),
     url(r'^view-book_log/(\d+)', books.view_book_log, name='view_book_log'),
 
-    # 心愿书
-    url(r'^whish-books/', books.whish_books, name='whish_books'),
+    # 心愿书  book-thoughts
+    url(r'^add-whish-books/', books.add_whish_books, name='add_whish_books'),
+    url(r'^view-whish-books/', books.view_whish_books, name='view_whish_books'),
+    url(r'^delete-wish-book/(\d+)', books.delete_wish_book, name='delete_wish_book'),
+
+    # 读书感悟
+    url(r'^add-book-thoughts-page/', books.add_book_thoughts_page, name='add_book_thoughts_page'),
+    url(r'^add-book-thoughts/', books.add_book_thoughts, name='add_book_thoughts'),
+    url(r'^view-book-thoughts/', books.view_book_thoughts, name='view_book_thoughts'),
+    url(r'^add-book-thoughts-reply/', books.add_book_thoughts_reply, name='add_book_thoughts_reply'),
+    url(r'^view-book-thoughts-detail/(\d+)', books.view_book_thoughts_detail, name='view_book_thoughts_detail'),
+    url(r'^delete-book-thoughts/(\d+)', books.delete_book_thoughts, name='delete_book_thoughts'),
 
 ]

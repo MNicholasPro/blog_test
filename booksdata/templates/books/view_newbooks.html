@@ -109,7 +109,7 @@
                                     {% endif %}
                                     <a href="/booksdata/view-book_log/{{ book.id }}" type="button" class="btn btn-success">日志</a>
                                     {% if request.session.user_id == 1 %}
-                                    <button type="button" class="btn btn-danger" onclick='changetoold({{ book.id }})'>删除</button>
+                                    <button type="button" class="btn btn-danger" onclick='changetoold({{ book.id }}, 1)'>删除</button>
                                     {% endif %}
                                 </td>
                             </tr>
