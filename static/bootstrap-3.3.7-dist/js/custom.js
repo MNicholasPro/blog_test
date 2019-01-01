@@ -13,6 +13,7 @@ $(function(){
 });
 
 function deleteRecord(deleteId, type) {
+    var r = confirm('请确定是否删除，选择"确认/OK"直接删除，选择"取消/Cancle"取消删除！！！!');
     var address = "";
     if (type == 1){
         address = "/booksdata/delete-author/";
@@ -23,20 +24,26 @@ function deleteRecord(deleteId, type) {
     }else if (type == 4){
         address = "/booksdata/delete-publisher/";
     }
-    $.getJSON(address + deleteId, {}, function (data) {
-        if (data == 1){
-            toastr.options.positionClass = 'toast-center-center';
-            toastr.success("已经删除！！！");
-            setTimeout(function(){location.reload();},3000);
-        }
-        else {
-            toastr.options.positionClass = 'toast-center-center';
-            toastr.error("删除失败，请联系管理员！！！");
-        }
-    });
+    if (r == true ){
+        $.getJSON(address + deleteId, {}, function (data) {
+            if (data == 1){
+                toastr.options.positionClass = 'toast-center-center';
+                toastr.success("已经删除！！！");
+                setTimeout(function(){location.reload();},3000);
+            }
+            else {
+                toastr.options.positionClass = 'toast-center-center';
+                toastr.error("删除失败，请联系管理员！！！");
+            }
+        });
+    }else {
+        toastr.options.positionClass = 'toast-center-center';
+        toastr.success("已经取消！！！");
+    }
 }
 
 function changetoold(newId, type) {
+    var r = confirm('请确定是否删除，选择"确认/OK"直接删除，选择"取消/Cancle"取消删除！！！!');
     var address = "";
     if (type == 1){
         address = "/booksdata/change-books/";
@@ -45,17 +52,24 @@ function changetoold(newId, type) {
     }else if (type == 3){
         address = "/booksdata/delete-book-thoughts/";
     }
-    $.getJSON(address + newId, {}, function (data) {
-        if (data == 1){
-            toastr.options.positionClass = 'toast-center-center';
-            toastr.success("已经删除！！！");
-            setTimeout(function(){location.reload();},3000);
-        }
-        else {
-            toastr.options.positionClass = 'toast-center-center';
-            toastr.error("删除失败，请联系管理员！！！");
-        }
-    });
+    if(r == true) {
+        $.getJSON(address + newId, {}, function (data) {
+            if (data == 1) {
+                toastr.options.positionClass = 'toast-center-center';
+                toastr.success("已经删除！！！");
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+            else {
+                toastr.options.positionClass = 'toast-center-center';
+                toastr.error("删除失败，请联系管理员！！！");
+            }
+        });
+    }else {
+        toastr.options.positionClass = 'toast-center-center';
+        toastr.success("已经取消！！！");
+    }
 }
 
 function Assign_get_id(bookId) {
@@ -104,9 +118,11 @@ function addReply(bookthoughtsid) {
     $.post('/booksdata/add-book-thoughts-reply/',{"bookthoughtsid":bookthoughtsid,"b_replycontent":b_replycontent},function(data){
         if(data=='1')
          {
-              toastr.success("留言成功,感谢！！！");location.reload();
+             toastr.options.positionClass = 'toast-center-center';
+             toastr.success("留言成功,感谢！！！");location.reload();
          }
          else
+             toastr.options.positionClass = 'toast-center-center';
              toastr.error("未能成功留言，请联系管理员！！！");
     });
 }
