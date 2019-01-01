@@ -126,3 +126,14 @@ function addReply(bookthoughtsid) {
              toastr.error("未能成功留言，请联系管理员！！！");
     });
 }
+
+//重写confirm方法，去掉地址显示
+window.confirm = function(name){
+    var iframe = document.createElement("IFRAME");
+    iframe.style.display="none";
+    iframe.setAttribute("src", 'data:text/plain,');
+    document.documentElement.appendChild(iframe);
+    var result = window.frames[0].window.confirm(name);
+    iframe.parentNode.removeChild(iframe);
+    return result;
+};
