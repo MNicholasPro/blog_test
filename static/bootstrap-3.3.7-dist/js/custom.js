@@ -25,11 +25,13 @@ function deleteRecord(deleteId, type) {
     }
     $.getJSON(address + deleteId, {}, function (data) {
         if (data == 1){
-            alert("删除成功！！！");
-            location.reload();
+            toastr.options.positionClass = 'toast-center-center';
+            toastr.success("已经删除！！！");
+            setTimeout(function(){location.reload();},3000);
         }
         else {
-            alert("删除失败，请联系管理员！！！");
+            toastr.options.positionClass = 'toast-center-center';
+            toastr.error("删除失败，请联系管理员！！！");
         }
     });
 }
@@ -45,11 +47,13 @@ function changetoold(newId, type) {
     }
     $.getJSON(address + newId, {}, function (data) {
         if (data == 1){
-            alert("删除成功！！！");
-            location.reload();
+            toastr.options.positionClass = 'toast-center-center';
+            toastr.success("已经删除！！！");
+            setTimeout(function(){location.reload();},3000);
         }
         else {
-            alert("删除失败，请联系管理员！！！");
+            toastr.options.positionClass = 'toast-center-center';
+            toastr.error("删除失败，请联系管理员！！！");
         }
     });
 }
@@ -67,24 +71,29 @@ function borrowbook(bookId, type) {
     if (type === 1){
         $.post("/booksdata/borrow-books/", {"book_id":window.bookId,"dept_code":dept_code[0],"borrow_item":borrow_item,"borrow_start":borrow_start,"borrow_end":borrow_end}, function (data) {
             if (data == 1){
-                alert("借阅成功！！！");
-                location.reload();
+                toastr.options.positionClass = 'toast-center-center';
+                toastr.success("借阅成功！！！");
+                setTimeout(function(){location.reload();},3000);
             }
             else {
-                alert("借阅失败，请联系管理员！！！");
+                toastr.options.positionClass = 'toast-center-center';
+                toastr.error("借阅失败，请联系管理员！！！");
             }
         });
     }else if(type == 2){
         $.getJSON("/booksdata/return-books/" + bookId, {}, function (data) {
             if (data == 1){
-                alert("归还成功！！！");
-                location.reload();
+                toastr.options.positionClass = 'toast-center-center';
+                toastr.success("归还成功！！！");
+                setTimeout(function(){location.reload();},3000);
             }
             else if (data == 2){
-                alert("请使用借阅人的账号进行归还操作，或者联系管理员，谢谢！！！");
+                toastr.options.positionClass = 'toast-center-center';
+                toastr.error("请使用借阅人的账号进行归还操作，或者联系管理员，谢谢！！！");
             }
             else {
-                alert("归还失败，请联系管理员！！！");
+                toastr.options.positionClass = 'toast-center-center';
+                toastr.error("归还失败，请联系管理员！！！");
             }
         });
     }
