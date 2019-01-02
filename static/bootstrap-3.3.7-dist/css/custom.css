@@ -15,3 +15,7 @@
     position:fixed;
     z-index:99999;
 }
+
+.modal.fade.in {
+    top: 90px;
+}
