@@ -46,6 +46,7 @@ def add_newbookdo(request):
     b_item = request.POST.get("b-item", " ")
     # booklist = Book.objects.create(book_name=b_name,book_type_id=b_type,book_publisher_id=b_pub,book_author_id=b_author,book_item=b_item)
     booklist = Book.objects.create(book_name=b_name,book_type_id=b_type,book_item=b_item)
+    booktypeList = Booktype.objects.filter().values_list("id", "book_type")
     return render(request, 'books/book.html', locals())
 
 
