@@ -165,10 +165,10 @@ def view_allbooks(request):
     bookId = request.POST.get("b-bookid", "")
     newbookList_pre = []
     if  bookId:
-        bookList = Book.objects.filter(id=bookId).order_by("-id")
+        bookList = Book.objects.filter(id=bookId).order_by("-book_count")
         newbookList_pre = append_list(request, bookList)
     else:
-        bookList = Book.objects.all().order_by("-id")
+        bookList = Book.objects.all().order_by("-book_count")
         newbookList_pre = append_list(request, bookList)
     newbookList = page_change(request, newbookList_pre)
     return render(request, 'books/view_allbooks.html', locals())
@@ -218,7 +218,7 @@ def add_whish_books(request):
 def view_whish_books(request):
     if request.session.get('is_login', None) is None:
         return redirect("/userlogin/index/")
-    wishbookList = WishBook.objects.filter(deleted=0)
+    wishbookList = WishBook.objects.filter(deleted=0).order_by("-agree_count")
     return render(request, 'books/view_wishbooks.html', locals())
 
 
