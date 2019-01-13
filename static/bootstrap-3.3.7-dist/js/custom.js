@@ -137,3 +137,21 @@ window.confirm = function(name){
     iframe.parentNode.removeChild(iframe);
     return result;
 };
+
+/**获取点赞数量**/
+function agreeBook(wishBookId, agreeCount) {
+    var agreeCountTotal = agreeCount + 1;
+    $.post("/booksdata/update-wish-count/", {"wishBookId":wishBookId,"agreeCount":agreeCountTotal}, function (data) {
+        if (data == 1){
+            toastr.options.positionClass = 'toast-center-center';
+            toastr.success("点赞成功,感谢！！！");
+            setTimeout(function(){location.reload();},2000);
+        }else if (data == 0){
+            toastr.options.positionClass = 'toast-center-center';
+            toastr.error("点赞失败，请联系管理员！！！");
+        }else if(data == 3){
+            toastr.options.positionClass = 'toast-center-center';
+            toastr.warning("请勿重复点赞，谢谢！！！");
+        }
+    });
+}

@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'^add-whish-books/', books.add_whish_books, name='add_whish_books'),
     url(r'^view-whish-books/', books.view_whish_books, name='view_whish_books'),
     url(r'^delete-wish-book/(\d+)', books.delete_wish_book, name='delete_wish_book'),
+    url(r'^update-wish-count/', books.updataWishAgreeCount, name='updataWishAgreeCount'),
 
     # 读书感悟
     url(r'^add-book-thoughts-page/', books.add_book_thoughts_page, name='add_book_thoughts_page'),

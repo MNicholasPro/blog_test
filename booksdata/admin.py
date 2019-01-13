@@ -2,6 +2,7 @@
 
 from django.contrib import admin
 # Register your models here.
+from booksdata.models.agree_record import AgreeRecord
 from booksdata.models.author import Author
 from booksdata.models.book import Book
 from booksdata.models.book_thoughts import BookThoughts
@@ -21,3 +22,4 @@ admin.site.register(BorrowLog)
 admin.site.register(WishBook)
 admin.site.register(BookThoughts)
 admin.site.register(BookThoughtsReply)
+admin.site.register(AgreeRecord)

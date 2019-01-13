@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
+from booksdata.models.agree_record import AgreeRecord
 from booksdata.models.book import Book
 from booksdata.models.book_thoughts import BookThoughts
 from booksdata.models.book_thoughts_reply import BookThoughtsReply
@@ -291,3 +292,19 @@ def delete_book_thoughts(request, deleteId):
         return HttpResponse(1)
     else:
         return HttpResponse(0)
+
+# 更新心愿书点赞数量
+@csrf_exempt
+def updataWishAgreeCount(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    wishBookId = request.POST.get("wishBookId", "")
+    agreeCount = request.POST.get("agreeCount", "")
+    agreeer = request.session.get("user_name")
+    agreeRecordList = AgreeRecord.objects.filter(agree_person=agreeer, wish_id_id=wishBookId)
+    if (agreeRecordList.count() > 0):
+        return HttpResponse(3)
+    if (AgreeRecord.objects.create(agree_person=agreeer, wish_id_id=wishBookId)):
+        WishBook.objects.filter(id=wishBookId).update(agree_count=agreeCount)
+        return HttpResponse(1)
+    return HttpResponse(0)

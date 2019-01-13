@@ -24,6 +24,7 @@
                         <th class="col-lg-3">作者</th>
 {#                        <th class="col-lg-3">出版社</th>#}
                         <th class="col-lg-1">备注</th>
+                        <th class="col-lg-1">心愿指数</th>
                         <th class="col-lg-1">操作</th>
                     </tr>
                     </thead>
@@ -33,9 +34,10 @@
                                 <td>{{ forloop.counter }}</td>
                                 <td>{{ book.book_name }}</td>
                                 <td>{{ book.book_author }}</td>
-{#                                <td>{{ book.book_publisher_id }}</td>#}
                                 <td>{{ book.book_item }}</td>
+                                <td>{{ book.agree_count }}</td>
                                 <td>
+                                    <button type="button" class="btn btn-success" onclick='agreeBook({{ book.id }}, {{ book.agree_count }})'>点赞</button>
                                     {% if request.session.user_id == 1 %}
                                     <button type="button" class="btn btn-danger" onclick='changetoold({{ book.id }}, 2)'>删除</button>
                                     {% endif %}
