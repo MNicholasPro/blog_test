@@ -299,6 +299,7 @@ def delete_book_thoughts(request, deleteId):
             return HttpResponse(0)
     return render(request, 'error.html', locals())
 
+
 # 更新心愿书点赞数量
 @csrf_exempt
 def updataWishAgreeCount(request):
