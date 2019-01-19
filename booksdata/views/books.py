@@ -89,10 +89,12 @@ def append_list(request, bookList):
 def change_newbooks(request, deleteId):
     if request.session.get('is_login', None) is None:
         return redirect("/userlogin/index/")
-    if Book.objects.filter(id=deleteId).update(if_new=1):
-        return HttpResponse(1)
-    else:
-        return HttpResponse(0)
+    if (request.session.get("user_id") == 1):
+        if Book.objects.filter(id=deleteId).update(if_new=1):
+            return HttpResponse(1)
+        else:
+            return HttpResponse(0)
+    return render(request, 'error.html', locals())
 
 
 # 借用书籍
@@ -226,10 +228,12 @@ def view_whish_books(request):
 def delete_wish_book(request, deleteId):
     if request.session.get('is_login', None) is None:
         return redirect("/userlogin/index/")
-    if WishBook.objects.filter(id=deleteId).update(deleted=1):
-        return HttpResponse(1)
-    else:
-        return HttpResponse(0)
+    if (request.session.get("user_id") == 1):
+        if WishBook.objects.filter(id=deleteId).update(deleted=1):
+            return HttpResponse(1)
+        else:
+            return HttpResponse(0)
+    return render(request, 'error.html', locals())
 
 
 # 新增读书感悟
@@ -288,10 +292,12 @@ def add_book_thoughts_reply(request):
 def delete_book_thoughts(request, deleteId):
     if request.session.get('is_login', None) is None:
         return redirect("/userlogin/index/")
-    if BookThoughts.objects.filter(id=deleteId).update(deleted=1):
-        return HttpResponse(1)
-    else:
-        return HttpResponse(0)
+    if (request.session.get("user_id") == 1):
+        if BookThoughts.objects.filter(id=deleteId).update(deleted=1):
+            return HttpResponse(1)
+        else:
+            return HttpResponse(0)
+    return render(request, 'error.html', locals())
 
 # 更新心愿书点赞数量
 @csrf_exempt
