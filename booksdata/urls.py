@@ -54,4 +54,7 @@ urlpatterns = [
     url(r'^view-book-thoughts-detail/(\d+)', books.view_book_thoughts_detail, name='view_book_thoughts_detail'),
     url(r'^delete-book-thoughts/(\d+)', books.delete_book_thoughts, name='delete_book_thoughts'),
 
+    # 查看自己借阅书籍
+    url(r'^view-allmy-books/', books.view_allmy_books, name='view_allmy_books'),
+
 ]

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}心愿书籍{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container" style="width: 100%">
+        <div class="col-md-12 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>我的借阅</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+                <table border="1" class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="col-lg-1">#</th>
+                        <th class="col-lg-2">书籍名称</th>
+{#                        <th class="col-lg-2">作者</th>#}
+{#                        <th class="col-lg-3">出版社</th>#}
+                        <th class="col-lg-2">备注</th>
+                        <th class="col-lg-1">操作</th>
+                    </tr>
+                    </thead>
+                    <today>
+                        {% for book in allmybookList %}
+                            <tr class="info">
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ book.book_name }}</td>
+{#                                <td>{{ book.book_author }}</td>#}
+                                <td>{{ book.book_item }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success" onclick='borrowbook({{ book.id }}, 2)'>归还</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </today>
+                </table>
+{#                {% if flag == 0 %}#}
+{#                <div class="form-group pull-right" style="display: none">#}
+{#                {% elif flag != 0 %}#}
+{#                <div class="form-group pull-right">#}
+{#                {% endif %}#}
+{#                        <span class="step-links" style="float: right">#}
+{#                            {% if report_list.has_previous %}#}
+{#                          <a href="?page={{ report_list.previous_page_number }}">前一页</a>#}
+{#                            {% endif %}#}
+{##}
+{#                            <span class="current">#}
+{#                               第{{ report_list.number }}页 ，共{{ report_list.paginator.num_pages }}页.#}
+{#                            </span>#}
+{##}
+{#                            {% if report_list.has_next %}#}
+{#                                <a href="?page={{ report_list.next_page_number }}">后一页</a>#}
+{#                            {% endif %}#}
+{#                        </span>#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+    </div>
+    </div> <!-- /container -->
+{% endblock %}

@@ -63,12 +63,13 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.is_login %}
-                  <li><a href="#" style="color: white">当前在线：{{ request.session.user_name }}</a></li>
+                  <li><a href="/booksdata/view-allmy-books" style="color: yellowgreen">当前在线：{{ request.session.user_name }}</a></li>
 {#                  <li><a href="/userlogin/logout/" style="color: white">我的详情</a></li>#}
-                  <li><a href="/userlogin/logout/" style="color: white">登出</a></li>
+                  <li><a href="/userlogin/logout/" style="color: lightblue">登出</a></li>
               {% else %}
                   <li><a href="/userlogin/login/" style="color: white">登录</a></li>
                   <li><a href="/userlogin/register/" style="color: white">注册</a></li>
+                  <li><a href="/userlogin/changepassword/" style="color: blue">忘记密码</a></li>
               {% endif %}
           </ul>
         </div><!-- /.navbar-collapse -->

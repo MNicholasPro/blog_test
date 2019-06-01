@@ -315,3 +315,12 @@ def updataWishAgreeCount(request):
         WishBook.objects.filter(id=wishBookId).update(agree_count=agreeCount)
         return HttpResponse(1)
     return HttpResponse(0)
+
+
+# 查看所有心愿书籍
+def view_allmy_books(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    bookBorrower = request.session.get("user_name")
+    allmybookList = Book.objects.filter(book_person=bookBorrower)
+    return render(request, 'books/view_allmybooks.html', locals())

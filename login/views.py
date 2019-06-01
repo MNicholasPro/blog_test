@@ -91,6 +91,34 @@ def logout(request):
     return redirect("/userlogin/login/")
 
 
+def changepassword(request):
+    if request.session.get('is_login', None) is None:
+        if request.method == "POST":
+            changePassword_form = forms.ChangePasswordForm(request.POST)
+            message = "请检查填写的内容！"
+            if changePassword_form.is_valid():  # 获取数据
+                username = changePassword_form.cleaned_data['username']
+                password1 = changePassword_form.cleaned_data['password1']
+                password2 = changePassword_form.cleaned_data['password2']
+                email = changePassword_form.cleaned_data['email']
+                if password1 != password2:  # 判断两次密码是否相同
+                    message = "两次输入的密码不同！"
+                    return render(request, 'login/changepassword.html', locals())
+                else:
+                    same_email_user = models.User.objects.filter(email=email)
+                    if same_email_user:  # 邮箱地址唯一
+                        # 当一切都OK的情况下，创建新用户
+                        new_user = models.User.objects.get(name=username)
+                        new_user.password = hash_code(password1)  # 使用加密密码
+                        new_user.save()
+                        return redirect('/userlogin/login/')  # 自动跳转到登录页面
+                    message = '请确认邮箱是否准确！'
+                    return render(request, 'login/changepassword.html', locals())
+        changePassword_form = forms.ChangePasswordForm()
+        return render(request, 'login/changepassword.html', locals())
+    return redirect("/userlogin/index/")
+
+
 def hash_code(s, salt='blo_test'):
     h = hashlib.sha256()
     s += salt
