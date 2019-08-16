@@ -83,7 +83,7 @@ function borrowbook(bookId, type) {
     var borrow_start = $("#borrow_start").val();
     var borrow_end = $("#borrow_end").val();
     if (type === 1){
-        $.post("/booksdata/borrow-books/", {"book_id":window.bookId,"dept_code":dept_code[0],"borrow_item":borrow_item,"borrow_start":borrow_start,"borrow_end":borrow_end}, function (data) {
+        $.post("/booksdata/borrow-books/", {"book_id":window.bookId,"dept_code":dept_code,"borrow_item":borrow_item,"borrow_start":borrow_start,"borrow_end":borrow_end}, function (data) {
             if (data == 1){
                 toastr.options.positionClass = 'toast-center-center';
                 toastr.success("借阅成功！！！");
