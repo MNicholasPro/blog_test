@@ -271,7 +271,7 @@ def view_book_thoughts_detail(request, bookthoughtsid):
     if request.session.get('is_login', None) is None:
         return redirect("/userlogin/index/")
     bookthoughtsDetail = BookThoughts.objects.filter(id=bookthoughtsid)[0]
-    bookthoughtreplyList = BookThoughtsReply.objects.filter(deleted=0).order_by("-id")
+    bookthoughtreplyList = BookThoughtsReply.objects.filter(deleted=0, book_thought_id=bookthoughtsid).order_by("-id")
     return render(request, 'books/book_thoughts_detail.html', locals())
 
 

@@ -20,7 +20,7 @@ class BookThoughts(models.Model):
 
     book_name = models.CharField('书籍名称', max_length=256)
     book_title = models.CharField('感悟名称', max_length=32)
-    book_thought = RichTextUploadingField('书籍感悟', max_length=1024)
+    book_thought = RichTextUploadingField('书籍感悟', max_length=2048)
     book_thought_author= models.CharField('书籍感悟作者', max_length=16)
     deleted = models.IntegerField('删除', default=0)
     book = models.ForeignKey("Book", on_delete=CASCADE)
