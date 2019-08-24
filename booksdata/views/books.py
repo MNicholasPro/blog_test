@@ -8,7 +8,7 @@
 import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import redirect, render
 
 from booksdata.models.agree_record import AgreeRecord
@@ -250,7 +250,8 @@ def add_book_thoughts(request):
         return redirect("/userlogin/index/")
     book_id = request.POST.get("b-bookid", "")
     book_title = request.POST.get("b-Title", "")
-    book_thought = request.POST.get("b-thought", "")
+    # book_thought = request.POST.get("b-thought", "")
+    book_thought = request.POST.get("goodsdesc", "")
     book_thought_author = request.session.get("user_name")
     book_name = Book.objects.filter(id=book_id).values("book_name")[0].get("book_name")
     BookThoughts.objects.create(book_name=book_name,book_title=book_title,book_thought=book_thought,book_thought_author=book_thought_author,book_id=int(book_id))
@@ -324,3 +325,30 @@ def view_allmy_books(request):
     bookBorrower = request.session.get("user_name")
     allmybookList = Book.objects.filter(book_person=bookBorrower)
     return render(request, 'books/view_allmybooks.html', locals())
+
+import time
+
+@csrf_exempt
+def upload_image(request):
+    if request.session.get('is_login', None) is None:
+        return redirect("/userlogin/index/")
+    if request.method == 'POST':
+        # callback = str(request.GET.get('CKEditorFuncNum'))
+        callback = str(1)
+        try:
+            path = "static/media/upload/photos/" + time.strftime("%Y%m%d%H%M%S",time.localtime())
+            f = request.FILES["upload"]
+            file_name = path + "_" + f.name
+            des_origin_f = open(file_name, "wb+")
+            for chunk in f:
+                des_origin_f.write(chunk)
+            des_origin_f.close()
+        except Exception as e:
+            print(e)
+        res = r"<script>window.parent.CKEDITOR.tools.callFunction("+callback+",'/"+file_name+"', '');</script>"
+        HttpResponse(res)
+        return JsonResponse({"uploaded": 1,
+                                "fileName": time.strftime("%Y%m%d%H%M%S",time.localtime()) + '_' + f.name,
+                                "url": "http://" + request.get_host() + "/" + file_name})
+    else:
+        raise Http404()

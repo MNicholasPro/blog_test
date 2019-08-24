@@ -57,4 +57,7 @@ urlpatterns = [
     # 查看自己借阅书籍
     url(r'^view-allmy-books/', books.view_allmy_books, name='view_allmy_books'),
 
+    # 上传文件
+    # url(r'^upload-image', books.upload_image, name='upload_image'),
+
 ]

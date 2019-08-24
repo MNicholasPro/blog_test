@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
 {% block title %}添加书籍{% endblock %}
+
 
 {% block content %}
     <br>
@@ -23,18 +23,11 @@
                             class="form-control" name="b-Title" id="b-Title"
                             placeholder="请输入感悟名称！！！">
                     </div><br>
+
                       <div class="form-group">
                           <label>读书感悟</label>
-                            <textarea class="form-control" style='overflow-y: hidden;height:100px' oninput="this.style.height = this.scrollHeight + 'px';" onkeyup="javascript:checkWord(this, 1024);" onmousedown="javascript:checkWord(this, 1024);" placeholder="请输入读书感悟！！！" name="b-thought" id="b-thought"></textarea>
-                            <div style="color: red;float: right;font-size: 10px;">*还可以输入<span style="font-family: Georgia; font-size: 15px;" id="wordCheck">1024</span>个字</div>
+                            <textarea class="ckeditor" cols="50" id="editor1"  rows="100" name="goodsdesc"></textarea>
                           <script>
-                {#            $(document).ready(function () {#}
-                {#                $("textarea.form-control").bind("mouseover",function () {#}
-                {#                    $(this).next().show();#}
-                {#                }).bind("mouseout",function () {#}
-                {#                    $(this).next().hide();#}
-                {#                });#}
-                {#            });#}
 
                             function Q(s) { return document.getElementById(s); }
 

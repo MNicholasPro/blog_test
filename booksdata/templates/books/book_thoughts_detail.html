@@ -4,13 +4,13 @@
 
 {% block content %}
     <br>
-    <div class="container">
+{#    <div class="container">#}
         <div class="form-group">
             <h1><strong>{{ bookthoughtsDetail.book_title }}</strong></h1>
         </div>
         <span>{{ bookthoughtsDetail.book_thought_author }}</span><br><br>
         <div class="form-group">
-              <pre style='border-color: transparent;'>{{ bookthoughtsDetail.book_thought }}</pre>
+              <pre style='border-color: transparent;'>{{ bookthoughtsDetail.book_thought | safe }}</pre>
         </div>
         <br>
         <span><strong>留言区</strong></span><hr>
@@ -27,5 +27,5 @@
             </p>
         </div>
         <br>
-    </div> <!-- /container -->
+{#    </div> <!-- /container -->#}
 {% endblock %}

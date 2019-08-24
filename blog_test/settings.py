@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'captcha',
-    'booksdata'
+    'booksdata',
+    'ckeditor',
+    'ckeditor_uploader'
 ]
 
 MIDDLEWARE = [
@@ -90,9 +92,9 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
+        'NAME': 'book',
         'USER':'root',
-        'PASSWORD':'123456',
+        'PASSWORD':'zmk123456',
         'HOST':'127.0.0.1',
         'PORT':'3306',
     }
@@ -150,7 +152,35 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static/media"),
 ]
 
 
 DEFAULT_CHARSET = 'utf-8'
+
+MEDIA_URL =  "/static/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
+CKEDITOR_UPLOAD_PATH = "upload/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+# CKEDITOR_JQUERY_URL = 'https://cdn.bootcss.com/jquery/2.1.4/jquery.js'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': (
+			['div','Source','-','Save','NewPage','Preview','-','Templates'],
+			['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],
+			['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+			['Form','Checkbox','Radio','TextField','Textarea','Select','Button', 'ImageButton','HiddenField'],
+			['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+			['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+			['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+			['Link','Unlink','Anchor'],
+			['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+			['Styles','Format','Font','FontSize'],
+			['TextColor','BGColor'],
+			['Maximize','ShowBlocks','-','About', 'pbckcode'],
+		),
+        # 插件
+        'extraPlugins': ','.join(['codesnippet','uploadimage','widget','lineutils',]),
+	}
+}
